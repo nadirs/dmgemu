@@ -55,8 +55,8 @@
 
 /* flags (register F) */
 #define ZF  0x80    // zero flag
-#define NF  0x40    // XXX: what's this flag?
-#define HF  0x20    // half carry flag (nybble verflow)
+#define NF  0x40    // negative flag
+#define HF  0x20    // half carry flag (nybble overflow)
 #define CF  0x10    // carry flag
 
 typedef struct {
