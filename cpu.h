@@ -17,13 +17,20 @@
 #define NF  0x00    // XXX: what's this flag?
 
 typedef struct {
-    uint8_t hi;
     uint8_t lo;
-} hilo;
+    uint8_t hi;
+} GBWORD;
 
 typedef union {
     uint16_t reg16;
-    hilo reg8;
+    GBWORD reg8;
 } reg;
+
+reg reg_af, reg_bc, reg_de, reg_hl, reg_pc, reg_sp;
+uint16_t *af, *bc, *de, *hl, *pc, *sp;
+uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
+
+void defregs(reg *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
+void buildregs(void);
 
 #endif
