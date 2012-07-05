@@ -53,27 +53,33 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-/* flags (register F) */
+/* cpu flag masks (register F) */
 #define ZF  0x80    // zero flag
 #define NF  0x40    // negative flag
 #define HF  0x20    // half carry flag (nybble overflow)
 #define CF  0x10    // carry flag
 
+/* 16-bit WORDs are little endian */
 typedef struct {
     uint8_t lo;
     uint8_t hi;
 } GBWORD;
 
+/*
+ * reference the same two bytes as:
+ *  - 1 WORD (16 bit);
+ *  - 2 BYTE ( 8 bit);
+ */
 typedef union {
     uint16_t reg16;
     GBWORD reg8;
-} reg;
+} REG;
 
-reg reg_af, reg_bc, reg_de, reg_hl, reg_pc, reg_sp;
-uint16_t *af, *bc, *de, *hl, *pc, *sp;
-uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
+/* You can use a single 8-bit register or the coupled 16-bit registers */
+static uint16_t *af, *bc, *de, *hl;//, *pc, *sp;
+static uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
 
-void defregs(reg *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
+void defregs(REG *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
 void buildregs(void);
 
 #endif
