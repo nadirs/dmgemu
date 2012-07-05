@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <inttypes.h>
 
+uint16_t *af, *bc, *de, *hl;//, *pc, *sp;
+uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
+
 void defregs(REG *reg_16, uint16_t **r16, uint8_t **l8, uint8_t **h8)
 {
     *r16 = &(reg_16->reg16);
@@ -22,11 +25,4 @@ void buildregs(void)
     defregs(&reg_bc, &bc, &c, &b);
     defregs(&reg_de, &de, &e, &d);
     defregs(&reg_hl, &hl, &l, &h);
-}
-
-int main(void)
-{
-    buildregs();
-
-    return 0;
 }

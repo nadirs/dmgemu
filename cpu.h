@@ -76,8 +76,8 @@ typedef union {
 } REG;
 
 /* You can use a single 8-bit register or the coupled 16-bit registers */
-static uint16_t *af, *bc, *de, *hl;//, *pc, *sp;
-static uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
+extern uint16_t *af, *bc, *de, *hl;//, *pc, *sp;
+extern uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
 
 void defregs(REG *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
 void buildregs(void);
