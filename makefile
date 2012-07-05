@@ -10,8 +10,11 @@ CFLAGS=-Wall -Wextra -Wshadow -fstack-protector -O3 -std=c99
 #       -- Force the compiler to use the correct headers
 #   -ansi   -- Don't use GNU extensions. Stick to ANSI C.
 
-cpu: cpu.c cpu.h
-	$(CC) $(CFLAGS) -o ./cpu ./cpu.c
+#cpu: cpu.c cpu.h
+#	$(CC) $(CFLAGS) -o ./cpu ./cpu.c
+
+asm: asm.c asm.h cpu.h
+	$(CC) $(CFLAGS) -o ./asm ./*.c
 
 clean:
 	rm -f ./cpu
