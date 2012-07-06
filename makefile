@@ -17,4 +17,4 @@ asm: asm.c asm.h cpu.h
 	$(CC) $(CFLAGS) -o ./asm ./*.c
 
 clean:
-	rm -f ./cpu
+	rm -f ./asm ./.*.swp ./*~
