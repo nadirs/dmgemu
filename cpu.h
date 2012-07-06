@@ -79,7 +79,7 @@ typedef union {
 extern uint16_t *af, *bc, *de, *hl;//, *pc, *sp;
 extern uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
 
-void defregs(REG *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
+//void defregs(REG *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
 void buildregs(void);
 
 #endif
