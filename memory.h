@@ -7,9 +7,10 @@
 #define MEMORY_H
 
 #include "cpu.h"
+#include <stdlib.h>
 
 /* RAM sizes */
-#define MEM_SIZE 0xFFFF
+#define MEM_SIZE 0x10000
 #define MEM_BANK_SIZE 0x4000
 #define MEM_VRAMDATA_SIZE 0x1800
 #define MEM_VRAMCODE_SIZE 0x0800
@@ -21,7 +22,6 @@
 
 /* RAM Addresses */
 #define MEM_FBANK 0x0000        // first fixed ROM bank
-#define MEM_START 0x0150        // code entry point
 #define MEM_SBANK 0x4000        // second switchable ROM bank
 #define MEM_VRAMDATA 0x8000     // Video RAM Character Data
 #define MEM_VRAMCODE 0x9800     // Video RAM Character Codes
@@ -35,9 +35,10 @@
 #define MEM_HWRAM 0xFF80        // Working & Stack RAM (127 bytes)
 
 
-extern uint8_t *memory_area[]; //XXX is it good to have this EXTERN?
+extern uint8_t *memory_area;
 
 uint8_t fetchbyte(void);
+uint8_t refetchbyte(void);
 uint8_t getmembyte(uint16_t addr);
 void putmembyte(uint16_t addr, uint8_t byte);
 
