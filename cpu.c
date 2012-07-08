@@ -41,8 +41,8 @@ void initregs(int gbtype)
 
 void buildregs(void)
 {
-    uint16_t _pc, _sp;
-    static REG reg_af, reg_bc, reg_de, reg_hl;//, reg_pc, reg_sp;
+    static uint16_t _pc, _sp;
+    static REG reg_af, reg_bc, reg_de, reg_hl;
 
     defregs(&reg_af, &af, &f, &a);
     defregs(&reg_bc, &bc, &c, &b);
