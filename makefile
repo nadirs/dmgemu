@@ -3,9 +3,8 @@ CFLAGS=-Wall -Wextra -Wshadow -fstack-protector -O3 -std=c99
 SRC=$(wildcard *.c)
 
 program_NAME := dmgemu
-program_C_SRCS := $(wildcard *.c)
-program_C_OBJS := ${program_C_SRCS:.c=.o}
-program_OBJS := $(program_C_OBJS)
+program_SRCS := $(wildcard *.c)
+program_OBJS := ${program_SRCS:.c=.o}
 
 .PHONY: all clean distclean
 
