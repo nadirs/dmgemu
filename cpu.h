@@ -50,14 +50,15 @@
 #ifndef CPU_H
 #define CPU_H
 
-#include <stdbool.h>
-#include <stdint.h>
+#include <inttypes.h>
+
+#define CODE_START 0x0100 // code entry point
 
 /* cpu flag masks (register F) */
-#define ZF  0x80    // zero flag
-#define NF  0x40    // negative flag
-#define HF  0x20    // half carry flag (nybble overflow)
-#define CF  0x10    // carry flag
+#define ZEROF   0x80    // zero flag
+#define NEGF    0x40    // negative flag
+#define HALFCF  0x20    // half carry flag (nybble overflow)
+#define CARRYF  0x10    // carry flag
 
 /* 16-bit WORDs are little endian */
 typedef struct {
@@ -65,6 +66,7 @@ typedef struct {
     uint8_t hi;
 } GBWORD;
 
+enum { DMG, CGB };
 /*
  * reference the same two bytes as:
  *  - 1 WORD (16 bit);
@@ -76,10 +78,9 @@ typedef union {
 } REG;
 
 /* You can use a single 8-bit register or the coupled 16-bit registers */
-extern uint16_t *af, *bc, *de, *hl;//, *pc, *sp;
+extern uint16_t *af, *bc, *de, *hl, *pc, *sp;
 extern uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
 
-//void defregs(REG *unionreg, uint16_t **reg16, uint8_t **lo8, uint8_t **hi8);
 void buildregs(void);
 
 #endif
