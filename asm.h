@@ -26,10 +26,9 @@
 #ifndef ASM_H
 #define ASM_H
 
-#include <inttypes.h>
 #include "cpu.h"
-
-#define OPCODE_NUM 0xFF
+#include "memory.h"
+#include <inttypes.h>
 
 enum {
     REG_A = 0x7,
@@ -47,7 +46,6 @@ struct instruction {
     void (* run)(void);
 };
 
-void (*opfunc[OPCODE_NUM]) (void);
 uint8_t *reg_src(uint8_t opcode); /* get source register in a LD instr */
 uint8_t *reg_dst(uint8_t opcode); /* get destination register in a LD instr */
 
@@ -69,7 +67,7 @@ static struct instruction instr_set[] = {
     {.opcode=0b01110000, .mask=0b11111000, .run=ld_hlr8},       // LD [HL],r
     {.opcode=0b00110110, .mask=0b11111111, .run=ld_hln},        // LD [HL],n
     {.opcode=0b00001010, .mask=0b11111111, .run=ld_abc},        // LD a,[BC]
-    {.opcode=0b00011010, .mask=0b11111111, .run=ld_ade},        // LD a,[DE]
+    {.opcode=0b00011010, .mask=0b11111111, .run=ld_ade}         // LD a,[DE]
 };
 
 #endif

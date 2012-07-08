@@ -4,7 +4,6 @@
  */
 
 #include "asm.h"
-#include "cpu.h"
 #include <stdio.h>
 
 uint8_t* ptrtoreg(uint8_t reg_id)
@@ -38,39 +37,68 @@ uint8_t* ptrtoreg(uint8_t reg_id)
     return ptr;
 }
 
-uint8_t *reg_src(uint8_t opcode)
+uint8_t *srcreg(uint8_t opcode)
 {
     return ptrtoreg(opcode & 0b00000111);
 }
 
-uint8_t *reg_dst(uint8_t opcode)
+uint8_t *dstreg(uint8_t opcode)
 {
     return ptrtoreg((opcode & 0b00111000) >> 3);
 }
 
-void runop(uint8_t *op)
+void ld_r8r8(void)
 {
-    switch (*op)
-    {
-        default:
-            break;
-    }
+    uint8_t opcode = refetchbyte();
+    *dstreg(opcode) = *srcreg(opcode);
+}
+
+void ld_r8n(void)
+{
+    uint8_t opcode = refetchbyte();
+    *dstreg(opcode) = fetchbyte();
+}
+
+void ld_r8hl(void)
+{
+    uint8_t opcode = refetchbyte();
+    *dstreg(opcode) = getmembyte(*hl);
+}
+
+void ld_hlr8(void)
+{
+    uint8_t opcode = refetchbyte();
+
+    putmembyte(*hl, *srcreg(opcode));
+}
+
+void ld_hln(void)
+{
+    uint8_t n = fetchbyte();
+
+    putmembyte(*hl, n);
+}
+
+void ld_abc(void)
+{
+    *a = getmembyte(*bc);
+}
+
+void ld_ade(void)
+{
+    *a = getmembyte(*de);
+}
+
+void printregs(void)
+{
+    printf("af: %04X\nbc: %04X\nde: %04X\nhl: %04X\n", *af, *bc, *de, *hl);
+    printf("\npc: %04X\nsp: %04X\n\n", *pc, *sp);
 }
 
 int main(void)
 {
-    uint8_t opcode;
-    uint8_t *regsrc, *regdst;
-
     buildregs();
-
-    opcode = 0x7A;
-    *a = 0x12;
-    *d = 0x34;
-    regsrc = reg_src(opcode);
-    regdst = reg_dst(opcode);
-
-    printf("%X\tLD $%X, $%X\n", opcode, *regdst, *regsrc);
+    printregs();
 
     return 0;
 }
