@@ -1,20 +1,28 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Wshadow -fstack-protector -O3 -std=c99
-#CFLAGS=-g -D__USE_FIXED_PROTOTYPES__ -ansi -std=c99
-#
-# Compiler flags:
-# -g    -- Enable debugging
-# -Wall -- Turn on all warnings (not used since it gives away
-#       the bug in this program)
-#   -D__USE_FIXED_PROTOTYPES__
-#       -- Force the compiler to use the correct headers
-#   -ansi   -- Don't use GNU extensions. Stick to ANSI C.
+SRC=$(wildcard *.c)
 
-#cpu: cpu.c cpu.h
-#	$(CC) $(CFLAGS) -o ./cpu ./cpu.c
+program_NAME := dmgemu
+program_C_SRCS := $(wildcard *.c)
+program_C_OBJS := ${program_C_SRCS:.c=.o}
+program_OBJS := $(program_C_OBJS)
 
-asm: asm.c asm.h cpu.h
-	$(CC) $(CFLAGS) -o ./asm ./*.c
+.PHONY: all clean distclean
+
+all: $(program_NAME)
+
+$(program_NAME): $(program_OBJS)
+	$(CC) $(program_OBJS) -o $(program_NAME)
 
 clean:
-	rm -f ./asm ./.*.swp ./*~
+	@- $(RM) $(program_NAME)
+	@- $(RM) $(program_OBJS)
+	@- $(RM) ./.*.swp ./*~
+
+distclean: clean
+
+#dmgemu: $(SRC)
+#	$(CC) -o  $@ $^ $(CFLAGS)
+#
+#clean:
+#	rm -f ./dmgemu 
