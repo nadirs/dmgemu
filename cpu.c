@@ -15,18 +15,18 @@ void defregs(REG *reg_16, uint16_t **r16, uint8_t **l8, uint8_t **h8)
     *h8 = &(reg_16->reg8.hi);
 }
 
-void initregs(int gbtype)
+void initregs()
 {
     *sp = 0xFFFE;
     *pc = CODE_START;
-    switch(gbtype) {
-        case DMG:
-            *a = 0x01;
-            *f = ZEROF | HALFCF | CARRYF;
-            *bc = 0x0013;
-            *de = 0x00D8;
-            *hl = 0x014D;
-            break;
+    
+    *a = 0x01;
+    *f = ZEROF | HALFCF | CARRYF;
+    *bc = 0x0013;
+    *de = 0x00D8;
+    *hl = 0x014D;
+    
+    /*
         case CGB:
             *a = 0x11;
             *f = ZEROF;
@@ -34,9 +34,18 @@ void initregs(int gbtype)
             *de = 0x0008;
             *hl = 0x007C;
             break;
-        default:
-            break;
-    }
+     */
+}
+
+uint8_t fetchbyte(void)
+{
+    (*pc)++;
+    return *(memory_area + *pc);
+}
+
+uint8_t refetchbyte(void)
+{
+    return *(memory_area + *pc);
 }
 
 void buildregs(void)
@@ -50,6 +59,10 @@ void buildregs(void)
     defregs(&reg_hl, &hl, &l, &h);
     pc = &_pc;
     sp = &_sp;
+}
 
-    initregs(DMG);
+void cpuinit(void)
+{
+    buildregs();
+    initregs();
 }

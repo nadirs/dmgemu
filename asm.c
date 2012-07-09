@@ -97,7 +97,7 @@ void printregs(void)
 
 int main(void)
 {
-    buildregs();
+    cpuinit();
     printregs();
 
     return 0;

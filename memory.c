@@ -14,17 +14,6 @@ void allocmemory(void)
     }
 }
 
-uint8_t fetchbyte(void)
-{
-    (*pc)++;
-    return *(memory_area + *pc);
-}
-
-uint8_t refetchbyte(void)
-{
-    return *(memory_area + *pc);
-}
-
 uint8_t getmembyte(uint16_t addr)
 {
     return *(memory_area + addr);

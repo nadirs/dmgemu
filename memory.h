@@ -6,8 +6,8 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include "cpu.h"
 #include <stdlib.h>
+#include <inttypes.h>
 
 /* RAM sizes */
 #define MEM_SIZE 0x10000
@@ -37,8 +37,6 @@
 
 extern uint8_t *memory_area;
 
-uint8_t fetchbyte(void);
-uint8_t refetchbyte(void);
 uint8_t getmembyte(uint16_t addr);
 void putmembyte(uint16_t addr, uint8_t byte);
 
