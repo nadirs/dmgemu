@@ -46,8 +46,8 @@ struct instruction {
     void (* run)(void);
 };
 
-uint8_t *reg_src(uint8_t opcode); /* get source register in a LD instr */
-uint8_t *reg_dst(uint8_t opcode); /* get destination register in a LD instr */
+uint8_t *srcreg(uint8_t opcode); /* get source register in a LD instr */
+uint8_t *dstreg(uint8_t opcode); /* get destination register in a LD instr */
 
 /*
  * GB-z80 INSTRUCTIONS
