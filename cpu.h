@@ -58,7 +58,7 @@
 /* cpu flag masks (register F) */
 #define ZEROF   0x80    // zero flag
 #define NEGF    0x40    // negative flag
-#define HALFCF  0x20    // half carry flag (nybble overflow)
+#define HALFCF  0x20    // half carry flag (half byte/word overflow)
 #define CARRYF  0x10    // carry flag
 
 /* 16-bit WORDs are little endian */
