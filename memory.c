@@ -19,6 +19,11 @@ uint8_t getmembyte(uint16_t addr)
     return *(memory_area + addr);
 }
 
+uint16_t getmemword(uint16_t addr)
+{
+    return (getmembyte(addr+1) << 8 | getmembyte(addr));
+}
+
 void putmembyte(uint16_t addr, uint8_t byte)
 {
     // FIXME: must control if addr is readonly (TODO: implement MBC controllers)

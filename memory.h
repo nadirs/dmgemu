@@ -38,6 +38,7 @@
 extern uint8_t *memory_area;
 
 uint8_t getmembyte(uint16_t addr);
+uint16_t getmemword(uint16_t addr);
 void putmembyte(uint16_t addr, uint8_t byte);
 
 #endif

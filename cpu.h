@@ -83,11 +83,9 @@ typedef union {
 extern uint16_t *af, *bc, *de, *hl, *pc, *sp;
 extern uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
 
-/*void defregs(REG *reg_16, uint16_t **r16, uint8_t **l8, uint8_t **h8);
-void initregs();
-void buildregs(void);*/
 uint8_t fetchbyte(void);
 uint8_t refetchbyte(void);
+uint16_t fetchword(void);
 void cpuinit(void);
 
 #endif

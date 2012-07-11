@@ -48,6 +48,16 @@ uint8_t refetchbyte(void)
     return *(memory_area + *pc);
 }
 
+uint16_t fetchword(void)
+{
+    uint16_t word;
+    (*pc)++;
+    word = getmemword(*pc);
+    (*pc)++;
+
+    return word;
+}
+
 void buildregs(void)
 {
     static uint16_t _pc, _sp;
