@@ -55,19 +55,30 @@
 
 #define CODE_START 0x0100 // code entry point
 
+/* cpu flag bits positions (register F) */
+#define ZEROB   7   // zero flag
+#define NEGB    6   // negative flag
+#define HALFCB  5   // half carry flag (carry from bit 3/11 (byte/word))
+#define CARRYB  4   // carry flag (carry from bit 7/15 (byte/word))
 /* cpu flag masks (register F) */
-#define ZEROF   0x80    // zero flag
-#define NEGF    0x40    // negative flag
-#define HALFCF  0x20    // half carry flag (carry from bit 3/11 (byte/word))
-#define CARRYF  0x10    // carry flag (carry from bit 7/15 (byte/word))
+#define ZEROF   1 << ZEROB  // zero flag
+#define NEGF    1 << NEGB   // negative flag
+#define HALFCF  1 << HALFCB // half carry flag (carry from bit 3/11 (byte/word))
+#define CARRYF  1 << CARRYB // carry flag (carry from bit 7/15 (byte/word))
+
+#define FLAG_ON_COND(flag, condition) \
+    do { \
+        if (condition) *f |= (flag); \
+        else *f &= ~(flag); \
+    } while(0)
+
+enum { DMG, CGB };
 
 /* 16-bit WORDs are little endian */
 typedef struct {
     uint8_t lo;
     uint8_t hi;
 } GBWORD;
-
-enum { DMG, CGB };
 
 /*
  * reference the same two bytes as:
