@@ -14,6 +14,11 @@ void allocmemory(void)
     }
 }
 
+uint8_t *getmembyte_ptr(uint16_t addr)
+{
+    return (memory_area + addr);
+}
+
 uint8_t getmembyte(uint16_t addr)
 {
     return *(memory_area + addr);
