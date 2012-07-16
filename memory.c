@@ -34,3 +34,9 @@ void putmembyte(uint16_t addr, uint8_t byte)
     // FIXME: must control if addr is readonly (TODO: implement MBC controllers)
     *(memory_area + addr) = byte;
 }
+
+void putmemword(uint16_t addr, uint16_t word)
+{
+    putmembyte(addr, (word >> 8));
+    putmembyte(addr+1, (word & 0xFF));
+}
