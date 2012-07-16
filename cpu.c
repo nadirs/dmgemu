@@ -6,7 +6,7 @@
 #include "cpu.h"
 
 uint16_t *af, *bc, *de, *hl, *pc, *sp;
-uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
+uint8_t *a, *f, *b, *c, *d, *e, *h, *l, *s, *p;
 
 void defregs(REG *reg_16, uint16_t **r16, uint8_t **l8, uint8_t **h8)
 {
@@ -60,15 +60,16 @@ uint16_t fetchword(void)
 
 void buildregs(void)
 {
-    static uint16_t _pc, _sp;
-    static REG reg_af, reg_bc, reg_de, reg_hl;
+    static uint16_t _pc;//, _sp;
+    static REG reg_af, reg_bc, reg_de, reg_hl, reg_sp;
 
     defregs(&reg_af, &af, &f, &a);
     defregs(&reg_bc, &bc, &c, &b);
     defregs(&reg_de, &de, &e, &d);
     defregs(&reg_hl, &hl, &l, &h);
+    defregs(&reg_sp, &sp, &s, &p);
     pc = &_pc;
-    sp = &_sp;
+//    sp = &_sp;
 }
 
 void cpuinit(void)

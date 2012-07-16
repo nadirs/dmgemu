@@ -92,7 +92,7 @@ typedef union {
 
 /* You can use a single 8-bit register or the coupled 16-bit registers */
 extern uint16_t *af, *bc, *de, *hl, *pc, *sp;
-extern uint8_t *a, *f, *b, *c, *d, *e, *h, *l;
+extern uint8_t *a, *f, *b, *c, *d, *e, *h, *l, *s, *p;
 
 uint8_t fetchbyte(void);
 uint8_t refetchbyte(void);
