@@ -4,8 +4,10 @@
  */
 
 #include "memory.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-uint8_t *memory_area;
+static uint8_t *memory_area;
 
 void allocmemory(void)
 {

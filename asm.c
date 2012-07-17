@@ -4,6 +4,10 @@
  */
 
 #include "asm.h"
+#include "cpu.h"
+#include "memory.h"
+#include <stdlib.h>
+#include <assert.h>
 
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
 // IF (bit7) THEN (negative ~u8) ELSE (positive u8)
@@ -374,7 +378,7 @@ uint16_t *ptrtoreg16_pushpop(uint8_t reg_id)
 
 uint8_t* ptrtoreg8(uint8_t reg_id)
 {
-    assert(reg_id < 8);
+    assert((reg_id < 6) || reg_id == 7);
     switch (reg_id) {
         case REG_B:
             return b;
@@ -391,7 +395,7 @@ uint8_t* ptrtoreg8(uint8_t reg_id)
         case REG_A:
             return a;
         default:
-            return &(*(memory_area + *hl)); // XXX this might cause bugs
+            return NULL;
     }
 }
 

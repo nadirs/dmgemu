@@ -6,7 +6,6 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include <stdlib.h>
 #include <inttypes.h>
 
 /* RAM sizes */
@@ -33,9 +32,6 @@
 #define MEM_HRAM 0xFF00         // High RAM
 #define MEM_REGS 0xFF00         // Port/Mode, Control, Sound Registers
 #define MEM_HWRAM 0xFF80        // Working & Stack RAM (127 bytes)
-
-
-extern uint8_t *memory_area;
 
 uint8_t getmembyte(uint16_t addr);
 uint16_t getmemword(uint16_t addr);

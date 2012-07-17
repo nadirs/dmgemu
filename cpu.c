@@ -39,14 +39,14 @@ void initregs()
 
 uint8_t fetchbyte(void)
 {
-    uint8_t result = *(memory_area + *pc);
+    uint8_t result = getmembyte(*pc);
     (*pc)++;
     return result;
 }
 
 uint8_t refetchbyte(void)
 {
-    return *(memory_area + *pc - 1);
+    return getmembyte(*pc);
 }
 
 uint16_t fetchword(void)

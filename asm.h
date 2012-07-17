@@ -6,10 +6,7 @@
 #ifndef ASM_H
 #define ASM_H
 
-#include "cpu.h"
-#include "memory.h"
 #include <inttypes.h>
-#include <assert.h>
 
 uint32_t run_opcode();
 
