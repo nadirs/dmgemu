@@ -4,7 +4,6 @@
  */
 
 #include "asm.h"
-#include <stdio.h>
 
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
 // IF (bit7) THEN (negative ~u8) ELSE (positive u8)
@@ -1600,18 +1599,4 @@ uint32_t stop(void)
     //  - Input to P10-P13 is LOW for all.
 
     return 1;
-}
-
-void printregs(void)
-{
-    printf("af: %04X\nbc: %04X\nde: %04X\nhl: %04X\n", *af, *bc, *de, *hl);
-    printf("\npc: %04X\nsp: %04X\n\n", *pc, *sp);
-}
-
-int main(void)
-{
-    cpuinit();
-    printregs();
-
-    return 0;
 }
