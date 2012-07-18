@@ -217,6 +217,7 @@ uint32_t rla(void);         /*     * 0 0 0 |   1    |      0     */
 uint32_t rrca(void);        /*     * 0 0 0 |   1    |      0     */
 uint32_t rra(void);         /*     * 0 0 0 |   1    |      0     */
 uint32_t rlc_xx(void);      /*     * 0 0 * |  2-4   |      0     */ // CB
+uint32_t rl_xx(void);       /*     * 0 0 * |  2-4   |      0     */ // CB
 uint32_t rrc_xx(void);      /*     * 0 0 * |  2-4   |      0     */ // CB
 uint32_t rr_xx(void);       /*     * 0 0 * |  2-4   |      0     */ // CB
 uint32_t sla_xx(void);      /*     * 0 0 * |  2-4   |      0     */ // CB
@@ -328,9 +329,10 @@ static struct instruction instr_set[] = {
     {.opcode=0b00010000, .mask=0b11111111, .run=stop}           // STOP
 };
 
-static struct instruction instr_set_CB[] = {
+static struct instruction instr_set_CB[11] = {
     /* Rotate Shift Instructions (check instr_set[] too) */
     {.opcode=0b00000000, .mask=0b11111000, .run=rlc_xx},        // RLC xx
+    {.opcode=0b00010000, .mask=0b11111000, .run=rl_xx},         // RL xx
     {.opcode=0b00001000, .mask=0b11111000, .run=rrc_xx},        // RRC xx
     {.opcode=0b00011000, .mask=0b11111000, .run=rr_xx},         // RR xx
     {.opcode=0b00100000, .mask=0b11111000, .run=sla_xx},        // SLA xx
@@ -1067,7 +1069,7 @@ uint32_t rlc_xx(void)
     uint32_t cycles = 0;
     uint8_t target = 0;
     uint8_t carry = 0;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1102,7 +1104,7 @@ uint32_t rl_xx(void)
     uint8_t target = 0;
     uint8_t new_carry = 0;
     uint8_t old_carry = (*f & CARRYF) >> CARRYB;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1136,7 +1138,7 @@ uint32_t rrc_xx(void)
     uint32_t cycles = 0;
     uint8_t target = 0;
     uint8_t carry = 0;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1171,7 +1173,7 @@ uint32_t rr_xx(void)
     uint8_t target = 0;
     uint8_t new_carry = 0;
     uint8_t old_carry = (*f & CARRYF) >> CARRYB;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1205,7 +1207,7 @@ uint32_t sla_xx(void)
     uint32_t cycles = 0;
     uint8_t target = 0;
     uint8_t carry = 0;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1237,7 +1239,7 @@ uint32_t sra_xx(void)
     uint32_t cycles = 0;
     uint8_t target = 0;
     uint8_t carry = 0;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1269,7 +1271,7 @@ uint32_t srl_xx(void)
     uint32_t cycles = 0;
     uint8_t target = 0;
     uint8_t carry = 0;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1300,7 +1302,7 @@ uint32_t swap_xx(void)
 {
     uint32_t cycles = 0;
     uint8_t target = 0;
-    uint8_t src_id = SRCREG_ID(fetchbyte());
+    uint8_t src_id = SRCREG_ID(refetchbyte());
     uint8_t *reg;
 
     switch(src_id){
@@ -1328,7 +1330,7 @@ uint32_t bit_nxx(void)
 {
     uint32_t cycles = 0;
     uint8_t target = 0;
-    uint8_t opcode = fetchbyte();
+    uint8_t opcode = refetchbyte();
     uint8_t src_id = SRCREG_ID(opcode);
     const uint8_t bit = BIT_INDEX(opcode);
 
@@ -1354,7 +1356,7 @@ uint32_t set_nxx(void)
 {
     uint32_t cycles = 0;
     uint8_t target = 0;
-    uint8_t opcode = fetchbyte();
+    uint8_t opcode = refetchbyte();
     uint8_t src_id = SRCREG_ID(opcode);
     const uint8_t bit = BIT_INDEX(opcode);
     uint8_t *reg;
@@ -1381,7 +1383,7 @@ uint32_t res_nxx(void)
 {
     uint32_t cycles = 0;
     uint8_t target = 0;
-    uint8_t opcode = fetchbyte();
+    uint8_t opcode = refetchbyte();
     uint8_t src_id = SRCREG_ID(opcode);
     const uint8_t bit = BIT_INDEX(opcode);
     uint8_t *reg;
