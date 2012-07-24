@@ -769,7 +769,7 @@ uint32_t sub_an(void)
 
     *a -= fetchbyte();
     SET_SUB_FLAGS(*a, oldval);
-    
+
     return 2;
 }
 
@@ -801,7 +801,7 @@ uint32_t sbc_an(void)
 
     *a -= (fetchbyte() + ((*f & CARRYF) >> CARRYB));
     SET_SBC_FLAGS(*a, oldval);
-    
+
     return 2;
 }
 
@@ -829,7 +829,7 @@ uint32_t and_an(void)
 {
     *a &= fetchbyte();
     SET_AND_FLAGS(*a);
-    
+
     return 2;
 }
 
@@ -857,7 +857,7 @@ uint32_t or_an(void)
 {
     *a |= fetchbyte();
     SET_OR_FLAGS(*a);
-    
+
     return 2;
 }
 
@@ -885,7 +885,7 @@ uint32_t xor_an(void)
 {
     *a &= ~(fetchbyte());
     SET_XOR_FLAGS(*a);
-    
+
     return 2;
 }
 
@@ -914,7 +914,7 @@ uint32_t cp_an(void)
 {
     uint8_t rvalue = fetchbyte();
     SET_CP_FLAGS(*a, rvalue);
-    
+
     return 2;
 }
 
@@ -1013,7 +1013,7 @@ uint32_t dec_r16(void)
 uint32_t rlca(void)
 {
     uint8_t carry = (*a & 0x80) >> 7;
-    
+
     *a <<= 1;
     *a += carry;
     // flags
@@ -1027,7 +1027,7 @@ uint32_t rla(void)
 {
     uint8_t old_carry = (*f & CARRYF) >> CARRYB;
     uint8_t new_carry = (*a & 0x80) >> 7;
-    
+
     *a <<= 1;
     *a += old_carry;
     // flags
@@ -1040,7 +1040,7 @@ uint32_t rla(void)
 uint32_t rrca(void)
 {
     uint8_t carry = (*a & 1);
-    
+
     // flags
     *a >>= 1;
     *a += carry;
@@ -1054,7 +1054,7 @@ uint32_t rra(void)
 {
     uint8_t old_carry = (*f & CARRYF) >> CARRYB;
     uint8_t new_carry = (*a & 1);
-    
+
     *a >>= 1;
     *a += old_carry;
     // flags
@@ -1558,7 +1558,7 @@ uint32_t daa(void)
             *a += 0x06;
             *f &= ~CARRYF; // XXX: often pointless but checks have a cost too!
         }
-        if ((a_hi - halfcflag > 8) || 
+        if ((a_hi - halfcflag > 8) ||
                 (carryflag && (a_hi - halfcflag < 3))) {
             *a += 0x60;
             *f |= CARRYF;
