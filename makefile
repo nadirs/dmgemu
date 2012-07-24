@@ -19,9 +19,3 @@ clean:
 	@- $(RM) ./.*.swp ./*~ ./*.gch
 
 distclean: clean
-
-#dmgemu: $(SRC)
-#	$(CC) -o  $@ $^ $(CFLAGS)
-#
-#clean:
-#	rm -f ./dmgemu 
