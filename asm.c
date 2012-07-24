@@ -344,7 +344,7 @@ static struct instruction instr_set_CB[11] = {
     {.opcode=0b10000000, .mask=0b11000000, .run=res_nxx}        // RES n,xx
 };
 
-uint16_t* ptrtoreg16(uint8_t reg_id)
+uint16_t *ptrtoreg16(uint8_t reg_id)
 {
     assert(reg_id < 4);
     switch (reg_id) {
