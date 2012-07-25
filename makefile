@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-pg -Wall -Wextra -Wshadow -fstack-protector -O3 -std=c99
 
 program_NAME := dmgemu
-program_SRCS := $(wildcard *.c)
+program_SRCS := $(wildcard ./src/*.c)
 program_OBJS := ${program_SRCS:.c=.o}
 
 .PHONY: all clean distclean
@@ -10,7 +10,7 @@ program_OBJS := ${program_SRCS:.c=.o}
 all: $(program_NAME)
 
 $(program_NAME): $(program_OBJS)
-	$(CC) $(program_OBJS) -o $(program_NAME)
+	$(CC) -C $(program_SRCS) -o $(program_NAME)
 
 clean:
 	@- $(RM) $(program_NAME)
