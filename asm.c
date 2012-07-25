@@ -431,9 +431,10 @@ void setregcouple_ptrs(uint8_t reg_id, uint8_t **lo, uint8_t **hi)
 uint32_t run_opcode_inset(struct instruction *instrset)
 {
     uint8_t opcode = fetchbyte();
+    uint16_t i = 0;
     struct instruction *instr_slider = &(instrset[0]);
 
-    for (uint16_t i=0; i<COUNT_OF(&instrset);++i) {
+    for (i=0; i<COUNT_OF(&instrset);++i) {
         instr_slider = &(instrset[i]);
         if ((opcode & (instr_slider->mask)) == instr_slider->opcode)
             break;
