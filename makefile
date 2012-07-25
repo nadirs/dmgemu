@@ -1,6 +1,5 @@
 CC=gcc
 CFLAGS=-pg -Wall -Wextra -Wshadow -fstack-protector -O3 -std=c99
-SRC=$(wildcard *.c)
 
 program_NAME := dmgemu
 program_SRCS := $(wildcard *.c)
