@@ -1,0 +1,40 @@
+# -*- coding:utf-8 -*-
+############
+# TODO LIST 
+############
+#
+# Valid tags:
+# [START]
+# [ISSUE] [BUG] [FEATURE] [MILESTONE] [MODEL]
+# [END]
+#
+# Valid statuses:
+# [ ]   open
+# [!]   open/important
+# [X]   closed
+#
+# Can have only two "!"(important) open cases at once.
+
+[START]
+[ ]  [ISSUE]    Improve modules encapsulation.
+[ ]  [FEATURE]  Provide Python-compliant interface.
+[ ]  [MODEL]    Implement "LD HL,SP+e" as:
+                    uint8_t next = fetchbyte();
+                    *sp += next - (0b10000000 & next).
+[X]  [BUG]      Fix ambiguous bitmasks in intruction set:
+                    modify "srcreg()" to check for [HL] too.
+[ ]  [FEATURE]  Add a cycle counter. Possible implementations:
+                    - [X] each ASM instruction returns spent cycles as an integer;
+                    - [ ] each ASM instruction takes the "cycle_counter" pointer
+                        as argument so it can increment it;
+                    - [ ] "cycle_counter" global variable accessible from any
+                        module.
+                Since each cycle takes "0.954 μs" to complete (thus CPU runs at
+                    1.05 Mhz), an "usleep(cycle_counter)" could be run each time
+                    cycle_counter reaches a certain value.
+[X]  [MODEL]    Implement address of "RST $n" as:
+                    uint8_t rst_addr = refetchbyte() & 0b00111000;
+[ ]  [ISSUE]    Implement a compile-time check for system endian-ness on the
+                    definition of GBWORD (it's located in "cpu.h").
+[!]  [ISSUE]    Add unit tests.
+[END]

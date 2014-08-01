@@ -1,3 +1,5 @@
 *.[oa]
 *~
-*.swp
+*.sw[op]
+*.so
+testdmgemu

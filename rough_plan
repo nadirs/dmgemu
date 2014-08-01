@@ -1,0 +1,56 @@
+DMGEMU
+
+--
+    cpu
+        data
+            internal registers
+            hardware registers
+        code
+            control clock cycles
+            fetch code
+                [MEMORY]
+                [ASM]
+            update hardware registers
+                timer registers
+                refresh time
+                    [LCD]
+--
+    memory
+        data
+            memory area
+            addresses values
+        code
+            obtain path to file (or actual FILE *f)
+            read byte
+            read array
+                [read byte]
+            write byte
+                check location
+                    is read-only?
+                    corresponds to hardware register?
+                [MBC] call effects (or bind them preventively)
+            write array
+                [write byte]
+--
+    asm
+        data
+            array of opcodes
+                opcode
+                mask
+                function pointer
+        code
+            opcode functions
+--
+    lcd
+        data
+            byte stream
+                bind it to the corresponding memory area
+            video hardware registers
+        code
+            produce graphics
+                compose graphics from data area and arrangement area
+    oam
+        data
+            [LCD]
+        code
+            [MEMORY]
