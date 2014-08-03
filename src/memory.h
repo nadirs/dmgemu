@@ -38,4 +38,7 @@ uint16_t getmemword(uint16_t addr);
 void putmembyte(uint16_t addr, uint8_t byte);
 void putmemword(uint16_t addr, uint16_t word);
 
+void setmemory(uint8_t *dest);
+uint8_t *getmemory();
+
 #endif

@@ -3,9 +3,9 @@
  * See the LICENSE for more information
  */
 
-#include "memory.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "memory.h"
 
 static uint8_t *memory_area;
 
@@ -36,4 +36,12 @@ void putmemword(uint16_t addr, uint16_t word)
 {
     putmembyte(addr, (word >> 8));
     putmembyte(addr+1, (word & 0xFF));
+}
+
+void setmemory(uint8_t *dest) {
+    memory_area = dest;
+}
+
+uint8_t *getmemory() {
+    return memory_area;
 }
