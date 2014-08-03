@@ -19,13 +19,13 @@ void initregs()
 {
     *sp = 0xFFFE;
     *pc = CODE_START;
-    
+
     *a = 0x01;
     *f = ZEROF | HALFCF | CARRYF;
     *bc = 0x0013;
     *de = 0x00D8;
     *hl = 0x014D;
-    
+
     /*
         case CGB:
             *a = 0x11;
@@ -46,7 +46,7 @@ uint8_t fetchbyte(void)
 
 uint8_t refetchbyte(void)
 {
-    return getmembyte(*pc);
+    return getmembyte(*pc - 1);
 }
 
 uint16_t fetchword(void)
