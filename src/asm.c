@@ -3,11 +3,12 @@
  * See the LICENSE for more information
  */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
 #include "asm.h"
 #include "cpu.h"
 #include "memory.h"
-#include <stdlib.h>
-#include <assert.h>
 
 #define COUNT_OF(x) ((sizeof(x)/sizeof(0[x])) / ((size_t)(!(sizeof(x) % sizeof(0[x])))))
 // IF (bit7) THEN (negative ~u8) ELSE (positive u8)
@@ -328,6 +329,7 @@ static struct instruction instr_set[] = {
     {.opcode=0b01110110, .mask=0b11111111, .run=halt},          // HALT
     {.opcode=0b00010000, .mask=0b11111111, .run=stop}           // STOP
 };
+const uint16_t INSTR_SET_COUNT = COUNT_OF(instr_set);
 
 static struct instruction instr_set_CB[11] = {
     /* Rotate Shift Instructions (check instr_set[] too) */
@@ -343,6 +345,7 @@ static struct instruction instr_set_CB[11] = {
     {.opcode=0b11000000, .mask=0b11000000, .run=set_nxx},       // SET n,xx
     {.opcode=0b10000000, .mask=0b11000000, .run=res_nxx}        // RES n,xx
 };
+const uint16_t INSTR_SET_CB_COUNT = COUNT_OF(instr_set_CB);
 
 uint16_t *ptrtoreg16(uint8_t reg_id)
 {
@@ -428,28 +431,30 @@ void setregcouple_ptrs(uint8_t reg_id, uint8_t **lo, uint8_t **hi)
     }
 }
 
-uint32_t run_opcode_inset(struct instruction *instrset)
+uint32_t run_opcode_inset(struct instruction instrset[], int count)
 {
     uint8_t opcode = fetchbyte();
     uint16_t i = 0;
-    struct instruction *instr_slider = &(instrset[0]);
+    struct instruction *instr_slider = instrset;
 
-    for (i=0; i<COUNT_OF(&instrset);++i) {
-        instr_slider = &(instrset[i]);
-        if ((opcode & (instr_slider->mask)) == instr_slider->opcode)
+    for (i=0; i<count;++i) {
+        instr_slider = instrset + i;
+        if ((opcode & (instr_slider->mask)) == instr_slider->opcode)  {
             break;
+        }
     }
+
     return instr_slider->run();
 }
 
 uint32_t run_opcode()
 {
-    return run_opcode_inset(instr_set);
+    return run_opcode_inset(instr_set, INSTR_SET_COUNT);
 }
 
 uint32_t get_CB(void)
 {
-    return run_opcode(instr_set_CB);
+    return run_opcode_inset(instr_set_CB, INSTR_SET_CB_COUNT);
 }
 
 uint8_t *srcreg8(uint8_t opcode)
