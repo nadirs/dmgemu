@@ -13,13 +13,13 @@
  *  P1      [FF00]
  *      The P1 ports are connected with a matrix for reading key operations.
  *  DIV     [FF04]
- *      The upper 8 bits of the 16-bit counter that counts the basic clock 
- *      frequency (f) can be referenced. If an LD instruction is executed, 
+ *      The upper 8 bits of the 16-bit counter that counts the basic clock
+ *      frequency (f) can be referenced. If an LD instruction is executed,
  *      these bits are cleared to 0 regardless of the value being written.
  *
  * Timer Registers:
  *  TIMA    [FF05]
- *      Timer Counter. The main timer unit. Generates an interrupt when it 
+ *      Timer Counter. The main timer unit. Generates an interrupt when it
  *      overflows.
  *  TMA     [FF06]
  *      Timer Modulo. The value of TMA is loaded when TIMA overflows.
@@ -40,9 +40,9 @@
  *          0: Disabled
  *          1: Enable
  *  IME
- *      Interupt Master Enable.
+ *      Interrupt Master Enable.
  *      0: Reset by DI instruction; prohibits all interrupts.
- *      1: Set by EI instruction; the interrupt set by IE registers are 
+ *      1: Set by EI instruction; the interrupt set by IE registers are
  *          enabled.
  * --------------------------------------------------------
  */
